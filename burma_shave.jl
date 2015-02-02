@@ -167,8 +167,20 @@ end
     beta = vel/c_kms # relativistic Doppler formula
     lam0 =  dv.lam * sqrt((1. - beta) / (1. + beta)) # [microns]
 
+    x1 = p.mu_RA * p.dpc
+    y1 = -p.mu_DEC * p.dpc
+
+    x2 = x1 * cosd(PA) + y1 * sind(PA)
+    y2 = -x1 * sind(PA) + y1 * cosd(PA)
+
+    mu_x = x2
+
+    # Because inclination matters here, we'll need to do some trig
+    mu_y = y2 * cosd(incl)
+    mu_z = y2 * sind(incl)
+
     # Run RADMC3D, redirect output to /dev/null
-    run(`radmc3d image incl $incl posang $PA npix $npix lambda $lam0` |> DevNull)
+    run(`radmc3d image incl $incl posang $PA npix $npix lambda $lam0 pointau $mu_x $mu_y $mu_z` |> DevNull)
 
     # Read the RADMC3D image from disk (we should already be in sub-directory)
     im = imread()
@@ -178,8 +190,8 @@ end
 
     # Apply the gridding correction function before doing the FFT
     # shifts necessary as if the image were already offset
-    corrfun!(skim, 1.0, p.mu_RA, p.mu_DEC) # alpha = 1.0 (relevant for spherical gridding function)
-    # corrfun!(skim, 1.0, 0.0, 0.0) # alpha = 1.0 (relevant for spherical gridding function)
+    # corrfun!(skim, 1.0, p.mu_RA, p.mu_DEC) # alpha = 1.0 (relevant for spherical gridding function)
+    corrfun!(skim, 1.0, 0.0, 0.0) # alpha = 1.0 (relevant for spherical gridding function)
 
     # FFT the appropriate image channel
     vis_fft = transform(skim)
@@ -188,7 +200,7 @@ end
     mvis = ModelVis(dv, vis_fft)
 
     # Apply the phase correction here, since there are fewer data points
-    phase_shift!(mvis, p.mu_RA, p.mu_DEC)
+    # phase_shift!(mvis, p.mu_RA, p.mu_DEC)
 
     # Calculate chi^2 between these two
     return lnprob(dv, mvis)
