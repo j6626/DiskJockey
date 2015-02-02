@@ -267,8 +267,21 @@ write_grid("", grid)
 write_model(pars, "", grid)
 write_lambda(shift_lams)
 
+
+x1 = pars.mu_RA * pars.dpc
+y1 = -pars.mu_DEC * pars.dpc
+
+x2 = x1 * cosd(PA) + y1 * sind(PA)
+y2 = -x1 * sind(PA) + y1 * cosd(PA)
+
+mu_x = x2
+
+# Because inclination matters here, we'll need to do some trig
+mu_y = y2 * cosd(incl)
+mu_z = y2 * sind(incl)
+
 if !parsed_args["norad"]
-    run(`radmc3d image incl $incl posang $PA npix $npix loadlambda`)
+    run(`radmc3d image incl $incl posang $PA npix $npix loadlambda pointau $mu_x $mu_y $mu_z`)
 end
 
 im = imread()
