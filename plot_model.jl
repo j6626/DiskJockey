@@ -290,7 +290,7 @@ im = imread()
 
 skim = imToSky(im, pars.dpc)
 
-# plot_chmaps(skim)
+plot_chmaps(skim)
 # plot_chmaps_data(skim)
 
 plot_spectrum(skim)
