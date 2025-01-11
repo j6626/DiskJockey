@@ -146,7 +146,7 @@ function plot_chmaps(img::image.SkyImage; log = false, contours = true, fname = 
 
                 end
 
-                ax[row, col].add_artist(PyPlot.matplotlib.patches.Ellipse((0, 0), width, height, PA, linewidth = 0.15, facecolor = "none", edgecolor = "w"))
+                ax[row, col].add_artist(PyPlot.matplotlib.patches.Ellipse((0, 0), width, height, angle=PA, linewidth = 0.15, facecolor = "none", edgecolor = "w"))
 
                 if iframe == 1
                     # Plot the colorbar
