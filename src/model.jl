@@ -875,6 +875,8 @@ n_13CO(r::Float64, z::Float64, pars::AbstractParameters) = number_densities["13C
 
 n_C18O(r::Float64, z::Float64, pars::AbstractParameters) = number_densities["C18O"] * rho_gas(r, z, pars)
 
+n_C17O(r::Float64, z::Float64, pars::AbstractParameters) = number_densities["C17O"] * rho_gas(r, z, pars)
+
 # It is realistic to include freezout of CO onto dust grains.
 # This is the amount by which the number density of the CO is reduced (X_freeze) relative to
 # the nominal value.

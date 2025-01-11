@@ -2,7 +2,7 @@
 
 module constants
 
-export M_sun, M_earth, AU, pc, G, kB, amu, c_ang, cc, c_kms, mu_gas, m_H, m_CO, m_12CO, m_13CO, m_C18O, number_densities, molnames, arcsec, deg, fftspace, MCO, lam0_12CO, lam0_13CO, lam0_C18O, lam0s, nyquist_factor, r_out_factor, Av_sigmaH, n_z_interpolator, X_H2, rho_gas_critical
+export M_sun, M_earth, AU, pc, G, kB, amu, c_ang, cc, c_kms, mu_gas, m_H, m_CO, m_12CO, m_13CO, m_C18O, m_C17O, number_densities, molnames, arcsec, deg, fftspace, MCO, lam0_12CO, lam0_13CO, lam0_C18O, lam0_C17O, lam0s, nyquist_factor, r_out_factor, Av_sigmaH, n_z_interpolator, X_H2, rho_gas_critical
 export RADMC_SIZEAU_SHIFT
 export DiskJockeyException, ModelException, ImageException
 export DISKJOCKEY_VERSION
@@ -35,8 +35,9 @@ m_CO = 28.01 * amu #molecular weight of CO in g
 m_12CO = 27.9949 * amu # [g]
 m_13CO = 28.9983 * amu # [g]
 m_C18O = 29.9992 * amu # [g]
+m_C17O = 28.9991 * amu # [g]
 
-atomic_massses = Dict([("12CO", m_12CO), ("13CO", m_13CO), ("C18O", m_C18O)])
+atomic_massses = Dict([("12CO", m_12CO), ("13CO", m_13CO), ("C18O", m_C18O), ("C17O", m_C17O)])
 
 # Using numbers from Charlie Qi
 # Number ratios measured relative to all single H nuclei (not H2) [unitless]
@@ -44,6 +45,7 @@ f_12CO = 7.5e-5
 X_12CO = 2 * f_12CO
 X_13CO = 1/69. * X_12CO
 X_C18O = 1/557. * X_12CO
+X_C17O = 1/(2005.2) * X_12CO
 
 # molecular hydrogen number ratio to gas [unitless]
 # [n_H2/n_gas] = 0.8
@@ -62,9 +64,9 @@ X_H2 = 0.8
 # This means that the new total disk mass we use will be 1/1.6 times smaller than the old time.
 
 # Use this to multiply against rho_gas to get n_12CO or n_13CO
-number_densities = Dict{String, Float64}([("12CO", X_H2 * X_12CO/(mu_gas * amu)), ("13CO", X_H2 * X_13CO/(mu_gas * amu)), ("C18O", X_H2 * X_C18O/(mu_gas * amu))])
+number_densities = Dict{String, Float64}([("12CO", X_H2 * X_12CO/(mu_gas * amu)), ("13CO", X_H2 * X_13CO/(mu_gas * amu)), ("C18O", X_H2 * X_C18O/(mu_gas * amu)), ("C17O", X_H2 * X_C17O/(mu_gas * amu))])
 
-molnames = Dict{String, String}([("12CO", "co"), ("13CO", "13co"), ("C18O", "c18o")])
+molnames = Dict{String, String}([("12CO", "co"), ("13CO", "13co"), ("C18O", "c18o"), ("C17O", "c17o")])
 
 # Species can be "12CO", "13CO", etc.
 # Transition can be "3-2", "2-1", etc.
@@ -76,6 +78,7 @@ lam0s = Dict{String, Float64}([("12CO2-1", cc/230.538e9 * 1e4 ),
             ("13CO2-1", cc/220.39868420e9 * 1e4),
             ("13CO3-2", cc/330.58796530e9 * 1e4),
             ("C18O2-1", cc/219.56035410e9 * 1e4),
+            ("C17O2-1", cc/224.7143850e9 * 1e4),
             ("12CO3-2", cc/345.7959899e9 * 1e4)]) # microns
 
 

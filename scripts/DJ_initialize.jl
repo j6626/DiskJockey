@@ -91,6 +91,8 @@ if parsed_args["M"]
         str *= " molecule_13co.inp numberdens_13co.inp"
     elseif species == "C18O"
         str *= " molecule_c18o.inp numberdens_c18o.inp"
+    elseif species == "C17O"
+        str *= " molecule_c17o.inp numberdens_c17o.inp"
     end
 
     println(str)
@@ -167,6 +169,9 @@ if config["gas"]
     elseif species == "C18O"
         run(`cp $(assets_dir)molecule_c18o.inp .`)
         run(`cp $(assets_dir)lines_c18o.inp lines.inp`)
+    elseif species == "C17O"
+        run(`cp $(assets_dir)molecule_c17o.inp .`)
+        run(`cp $(assets_dir)lines_c17o.inp lines.inp`)
     end
 
     println("Copied over RADMC-3D gas input files.")
