@@ -911,7 +911,7 @@ microturbulence(pars::AbstractParameters) = microturbulence(pars.ksi)
 
 function write_model(pars::AbstractParameters, basedir::AbstractString, grid::Grid, species::AbstractString)
 
-    funcs = Dict([("12CO", n_12CO), ("13CO", n_13CO), ("C18O", n_C18O)])
+    funcs = Dict([("12CO", n_12CO), ("13CO", n_13CO), ("C18O", n_C18O), ("C17O", n_C17O)])
     n_CO = funcs[species]
 
     # numberdens_co.inp
