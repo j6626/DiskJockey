@@ -26,9 +26,9 @@ parameters:
   T_10: 91.85 # [K] temperature at 10 AU
   q: 0.5 # temperature gradient exponent
   gamma: -1.5 # surface density gradient within r_c (negative values yield holes)
-  logalpha : 0.5 # log10 sharpness of transition (10^0.1 = smooth, 10^1.2 = sharp)
+  log_alpha : 0.5 # log10 sharpness of transition (10^0.1 = smooth, 10^1.2 = sharp)
   beta : 7.0 # gradient power law outside r_c (~7)
-  logSigma_c: -2.0 # log10 [M_Sun] disk mass of gas
+  log_M_gas: 3.0 # [M_Sun] disk mass of gas
   ksi: 0.2 # [km/s] microturbulence
   dpc: 145. # [pc] distance
   incl: 45.0 # [degrees] inclination

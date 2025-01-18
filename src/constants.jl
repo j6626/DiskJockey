@@ -45,7 +45,7 @@ f_12CO = 7.5e-5
 X_12CO = 2 * f_12CO
 X_13CO = 1/69. * X_12CO
 X_C18O = 1/557. * X_12CO
-X_C17O = 1/(2005.2) * X_12CO
+X_C17O = 1/2005.2 * X_12CO
 
 # molecular hydrogen number ratio to gas [unitless]
 # [n_H2/n_gas] = 0.8

@@ -184,8 +184,8 @@ end
 # These will be used to correct for the half-pixel offset
 @everywhere half_pix = dl / (arcsec * 2.) # [arcsec/half-pixel]
 
-@everywhere uu = fftshift(fftfreq(npix, dl)) * 1e-3 # [kλ]
-@everywhere vv = fftshift(fftfreq(npix, dl)) * 1e-3 # [kλ]
+@everywhere uu = fftshift(visibilities.fftfreq(npix, dl)) * 1e-3 # [kλ]
+@everywhere vv = fftshift(visibilities.fftfreq(npix, dl)) * 1e-3 # [kλ]
 
 # For each channel, calculate the interpolation closures
 @everywhere int_arr = Array{Function}(undef, nchan)
